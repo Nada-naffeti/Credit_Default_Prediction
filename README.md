@@ -1,6 +1,6 @@
 #  Credit Card Default Prediction
 
-Prédiction des défauts de paiement par carte de crédit à partir du dataset UCI — un projet complet de bout en bout combinant analyse exploratoire, sélection de variables par WOE/IV, gestion du déséquilibre de classes et modélisation.
+Prédiction des défauts de paiement par carte de crédit à partir du dataset UCI, un projet complet de bout en bout combinant analyse exploratoire, sélection de variables par WOE/IV, gestion du déséquilibre de classes et modélisation.
 
 ---
 
