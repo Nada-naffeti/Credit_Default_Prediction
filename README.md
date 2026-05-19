@@ -1,97 +1,95 @@
-#  Credit Card Default Prediction
+# Credit Card Default Prediction
 
-Prédiction des défauts de paiement par carte de crédit à partir du dataset UCI, un projet complet de bout en bout combinant analyse exploratoire, sélection de variables par WOE/IV, gestion du déséquilibre de classes et modélisation.
-
----
-
-##  Contexte
-
-Dans le secteur bancaire, anticiper le défaut de paiement d'un client est un enjeu majeur pour la gestion du risque de crédit. Ce projet s'appuie sur un dataset réel de 30 000 clients d'une banque taïwanaise pour construire un modèle de scoring prédictif.
-
-**Dataset :** [UCI Credit Card Default Dataset](https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset)  
-**Variable cible :** `default.payment.next.month` (1 = défaut, 0 = pas de défaut)
+**Predicting credit card payment defaults using machine learning**  
+EDA · WOE/IV · SMOTE · Logistic Regression · UCI Dataset
 
 ---
 
-##  Démarche
+## Overview
 
-### 1. Analyse exploratoire (EDA)
-- Analyse univariée des variables qualitatives (SEX, EDUCATION, MARRIAGE, PAY_i) et quantitatives (LIMIT_BAL, AGE, BILL_AMT_i, PAY_AMT_i)
-- Détection du déséquilibre de classes : **77% non-défaut / 23% défaut**
-- Tests statistiques : **chi² pour les variables catégorielles**, **ANOVA pour les variables continues**
+Predicting whether a client will default on their credit card payment is a critical challenge in banking risk management. This project delivers a full end-to-end pipeline — from exploratory analysis to modeling — on a real-world dataset of **30,000 clients** from a Taiwanese bank.
 
-### 2. Sélection de variables par WOE / Information Value
-- Calcul du Weight of Evidence (WOE) et de l'Information Value (IV) pour chaque variable
-- Variables les plus prédictives identifiées : `PAY_0`, `PAY_2`, `PAY_3`, `PAY_4`, `PAY_5`, `PAY_6`, `LIMIT_BAL`, `PAY_AMT1`, `PAY_AMT3`
-- Analyse de la multicolinéarité entre variables PAY_i via le **coefficient V de Cramér**
+| | |
+|---|---|
+| **Dataset** | [UCI Credit Card Default Dataset](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients) |
+| **Target variable** | `default.payment.next.month` (1 = default, 0 = no default) |
+| **Class imbalance** | 77% non-default / 23% default |
+| **Best model** | Logit + StandardScaler — Accuracy: 82.2% · Gini: 0.528 |
+
+---
+
+## Methodology
+
+### 1. Exploratory Data Analysis (EDA)
+- Univariate analysis of categorical variables (`SEX`, `EDUCATION`, `MARRIAGE`, `PAY_i`) and continuous variables (`LIMIT_BAL`, `AGE`, `BILL_AMT_i`, `PAY_AMT_i`)
+- Class imbalance detection and visualization
+- Statistical tests: **Chi-square** for categorical variables, **ANOVA** for continuous ones
+
+### 2. Feature Selection — WOE / Information Value
+- Computed **Weight of Evidence (WOE)** and **Information Value (IV)** for each feature
+- Most predictive variables: `PAY_0`, `PAY_2` → `PAY_6`, `LIMIT_BAL`, `PAY_AMT1`, `PAY_AMT3`
+- Multicollinearity analysis using **Cramér's V coefficient**
 
 ### 3. Preprocessing
-- Recodage et regroupement des modalités
-- Discrétisation des variables continues par intervalles (binning)
-- Comparaison de plusieurs stratégies de normalisation : **StandardScaler, MinMaxScaler, RobustScaler**
-- Rééchantillonnage par **SMOTE** pour corriger le déséquilibre de classes
+- Feature recoding and category grouping
+- Continuous variable discretization (binning)
+- Comparison of normalization strategies: `StandardScaler`, `MinMaxScaler`, `RobustScaler`
+- Class rebalancing with **SMOTE**
 
-### 4. Modélisation
-- **Régression Logistique** — plusieurs configurations testées :
-  - Sans scaling
-  - Avec StandardScaler → **Accuracy : 82.2% | Gini : 0.528**
-  - Avec MinMaxScaler → Accuracy : 82.1% | Gini : 0.523
-  - Avec RobustScaler → Accuracy : 82.2% | Gini : 0.528
-  - Avec SMOTE + StandardScaler → Accuracy : 72.5% | **Gini : 0.586**
-- Évaluation via : **courbe ROC, indice de Gini, matrice de confusion, classification report**
+### 4. Modeling
+- Logistic Regression tested across multiple configurations
+- Evaluation metrics: ROC curve, Gini index, confusion matrix, classification report
 
 ---
 
-## 📊 Résultats clés
+## Results
 
-| Modèle | Accuracy | Gini Index |
-|---|---|---|
-| Logit sans scaling | 77.7% | 0.301 |
-| Logit + StandardScaler | 82.2% | 0.528 |
+| Model | Accuracy | Gini Index |
+|-------|----------|------------|
+| Logit — no scaling | 77.7% | 0.301 |
+| Logit + StandardScaler | **82.2%** | **0.528** |
 | Logit + RobustScaler | 82.2% | 0.528 |
-| Logit + SMOTE | 72.5% | **0.586** |
+| Logit + SMOTE + StandardScaler | 72.5% | 0.586 |
 
-> Le modèle avec SMOTE sacrifie légèrement l'accuracy globale mais améliore significativement la détection des clients défaillants (classe minoritaire).
+> **Note:** The SMOTE model trades off overall accuracy for significantly better detection of defaulting clients (minority class) — a key priority in credit risk management.
 
 ---
 
-##  Stack technique
+## Tech Stack
 
 ```
-Python 3.10
-pandas | numpy | matplotlib | seaborn
-scikit-learn | imbalanced-learn (SMOTE)
-scipy
+pandas · numpy · matplotlib · seaborn
+scikit-learn · imbalanced-learn (SMOTE) · scipy
 ```
 
 ---
 
-## 📁 Structure du repo
+## Project Structure
 
 ```
 credit-default-prediction/
 ├── README.md
-├── notebook/
-│   └── credit_default_analysis.ipynb
+├── pfa-analyse-de-transactions-de-cartes-de-cr-dit.ipynb
 ├── data/
-│   └── README.md        # lien vers le dataset Kaggle/UCI
+│   └── README.md        # link to UCI/Kaggle dataset
 └── requirements.txt
 ```
 
 ---
 
-##  Reproduire le projet
+## Getting Started
 
 ```bash
-git clone https://github.com/ton-username/credit-default-prediction
+git clone https://github.com/Nada-naffeti/credit-default-prediction.git
 cd credit-default-prediction
 pip install -r requirements.txt
-jupyter notebook notebook/credit_default_analysis.ipynb
+jupyter notebook pfa-analyse-de-transactions-de-cartes-de-cr-dit.ipynb
 ```
 
 ---
 
-## 👩‍💻 Auteure
+## Author
 
-**Nada Naffeti** — Élève-ingénieure en Statistiques et Intelligence Artificielle à l'ESSAI  
-[LinkedIn](https://linkedin.com/in/ton-profil) · [GitHub](https://github.com/ton-username)
+**Nada Naffeti** — Data Science & AI Engineering Student @ [ESSAI](https://www.essai.tn/)
+
+[LinkedIn](https://linkedin.com/in/nada-naffeti) · [GitHub](https://github.com/Nada-naffeti)
