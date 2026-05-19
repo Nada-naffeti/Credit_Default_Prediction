@@ -7,7 +7,7 @@ EDA · WOE/IV · SMOTE · Logistic Regression · UCI Dataset
 
 ## Overview
 
-Predicting whether a client will default on their credit card payment is a critical challenge in banking risk management. This project delivers a full end-to-end pipeline — from exploratory analysis to modeling — on a real-world dataset of **30,000 clients** from a Taiwanese bank.
+Predicting whether a client will default on their credit card payment is a critical challenge in banking risk management. This project delivers a full end-to-end pipeline from exploratory analysis to modeling on a real-world dataset of **30,000 clients** from a Taiwanese bank.
 
 | | |
 |---|---|
@@ -51,7 +51,7 @@ Predicting whether a client will default on their credit card payment is a criti
 | Logit + RobustScaler | 82.2% | 0.528 |
 | Logit + SMOTE + StandardScaler | 72.5% | 0.586 |
 
-> **Note:** The SMOTE model trades off overall accuracy for significantly better detection of defaulting clients (minority class) — a key priority in credit risk management.
+> **Note:** The SMOTE model trades off overall accuracy for significantly better detection of defaulting clients (minority class) a key priority in credit risk management.
 
 ---
 
